@@ -40,8 +40,8 @@ export default class App extends React.Component {
       pieSize: pieSize,
       piePos: piePos
     }, () => {
-      console.log(this.state.piePos)
-      console.log(this.state.pieSize)
+      console.log('!!', this.state.piePos)
+      console.log('@@', this.state.pieSize)
     })
   }
   drawTest (angle, color) {
@@ -65,9 +65,10 @@ export default class App extends React.Component {
             // 덮어씨우는 정사각형 반은 투명 반은 흰색
             flexDirection: 'row',
             width: 200,
+            height: 200,
             transform: [{ rotate: `${angle}rad` }]
           }}>
-            {(console.log('test3'))}
+            {(console.log('test3', angle))}
             <View style={{
               width: 100,
               height: 200,
@@ -114,6 +115,8 @@ export default class App extends React.Component {
               position: 'relative',
               marginLeft: 100,
               overflow: 'hidden',
+              borderColor: '#AA0000',
+              borderWidth: 0,
               height: (1 - Math.cos(angle)) * 100
             }}>
               <View style={{left: -100}}>
@@ -121,15 +124,10 @@ export default class App extends React.Component {
               </View>
             </View>
             <View style={{
-              // 삼각형 그릴 공간
-              // ##위치 정해야함!
-              // borderBottomColor를 transparent를 주고, borderLeftColor를 color로 줘야하는데 없는거같다.
+              // right triangle
               width: 0,
               height: 0,
               left: 100,
-              // ##여기에서 일단 오류가 하나납니다! Invalid props.style key `borderBottom` supplied to `View`
-              /*
-              */
               borderBottomWidth: Math.cos(angle) * 100,
               borderBottomColor: 'transparent',
               borderLeftWidth: Math.sin(angle) * 100,
@@ -145,15 +143,17 @@ export default class App extends React.Component {
     let pies = []
     if (this.state.pieSize.length === 0) return null
     for (let i = 0; i < this.state.pieSize.length; i++) {
-      pies.push(
-        <View key={`t${i}`} style={{
-          transform: [{ rotate: `${this.state.piePos[i]}rad` }],
-          position: 'absolute'
-        }}>
-          {this.drawPie(this.state.pieSize[i], this.props.colors[i])
-          }
-        </View>
-      )
+      
+        pies.push(
+          <View key={`t${i}`} style={{
+            transform: [{ rotate: `${this.state.piePos[i]}rad` }],
+            position: 'absolute'
+          }}>
+            {this.drawPie(this.state.pieSize[i], this.props.colors[i])
+            }
+          </View>
+        )
+      
     }
     return (
       pies
@@ -164,29 +164,12 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text>Open up App.js to start working on your app!</Text>
         { this.drawT()}
-        { // this.drawPie(1 / 3 * Math.PI, 'red')
-        }
-        <View style={{
-              // 삼각형 그릴 공간
-              // ##위치 정해야함!
-              // borderBottomColor를 transparent를 주고, borderLeftColor를 color로 줘야하는데 없는거같다.
-          width: 0,
-          height: 0,
-              // ##여기에서 일단 오류가 하나납니다! Invalid props.style key `borderBottom` supplied to `View`
-              /*
-              */
-          borderBottomWidth: Math.cos(1 / 3 * Math.PI) * 100,
-          borderBottomColor: 'transparent',
-          borderLeftWidth: Math.sin(1 / 3 * Math.PI) * 100,
-          borderLeftColor: 'blue',
-          display: 'none'
-        }} />
       </View>
     )
   }
 }
 App.defaultProps = {
-  data: [40, 30, 10, 10],
+  data: [10, 20, 50, 30],
   colors: ['red', 'blue', 'green', 'yellow']
 }
 const styles = StyleSheet.create({
@@ -195,12 +178,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  // 반지름이 100인 원
   circle: {
     width: 200,
     position: 'absolute',
     height: 200,
     borderRadius: 100
   },
+  // 정사각형을 반토막낸 직사각형
   rectangle: {
     width: 100,
     height: 200,
@@ -208,6 +193,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'transparent'
   },
+  // 우반원
   rightHalfCircle: {
     width: 100,
     height: 200,
