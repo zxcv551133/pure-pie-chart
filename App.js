@@ -48,8 +48,8 @@ export default class App extends React.Component {
     return (
       <View style={{
         // ##위치 정해야함
-        width: this.props.radius + Math.sin(angle) * this.props.radius,
-        height: (1 - Math.cos(angle)) * this.props.radius,
+        width: 100 + Math.sin(angle) * 100,
+        height: (1 - Math.cos(angle)) * 100,
         borderWidth: 0,
         borderColor: '#00AA00'
       }}>
@@ -64,18 +64,18 @@ export default class App extends React.Component {
           <View style={{
             // 덮어씨우는 정사각형 반은 투명 반은 흰색
             flexDirection: 'row',
-            width: this.props.radius * 2,
+            width: 200,
             transform: [{ rotate: `${angle}rad` }]
           }}>
             {(console.log('test3'))}
             <View style={{
-              width: this.props.radius,
-              height: this.props.radius * 2,
+              width: 100,
+              height: 200,
               backgroundColor: 'transparent'
             }} />
             <View style={{
-              width: this.props.radius,
-              height: this.props.radius * 2,
+              width: 100,
+              height: 200,
               backgroundColor: 'white'
             }} />
             {(console.log('test4'))}
@@ -105,18 +105,18 @@ export default class App extends React.Component {
           // 예각인 파이를 그릴 공간
           <View style={{
             position: 'relative',
-            width: this.props.radius * 2,
-            height: this.props.radius * 2
+            width: 200,
+            height: 200
           }}>
             {(console.log('test'))}
             <View style={{
-              width: Math.sin(angle) * this.props.radius,
+              width: Math.sin(angle) * 100,
               position: 'relative',
-              marginLeft: this.props.radius,
+              marginLeft: 100,
               overflow: 'hidden',
-              height: (1 - Math.cos(angle)) * this.props.radius
+              height: (1 - Math.cos(angle)) * 100
             }}>
-              <View style={{left: -this.props.radius}}>
+              <View style={{left: -100}}>
                 {this.drawTest(angle, color)}
               </View>
             </View>
@@ -126,13 +126,13 @@ export default class App extends React.Component {
               // borderBottomColor를 transparent를 주고, borderLeftColor를 color로 줘야하는데 없는거같다.
               width: 0,
               height: 0,
-              left: this.props.radius,
+              left: 100,
               // ##여기에서 일단 오류가 하나납니다! Invalid props.style key `borderBottom` supplied to `View`
               /*
               */
-              borderBottomWidth: Math.cos(angle) * this.props.radius,
+              borderBottomWidth: Math.cos(angle) * 100,
               borderBottomColor: 'transparent',
-              borderLeftWidth: Math.sin(angle) * this.props.radius,
+              borderLeftWidth: Math.sin(angle) * 100,
               borderLeftColor: color
             }} />
             {(console.log('test5'))}
@@ -175,9 +175,9 @@ export default class App extends React.Component {
               // ##여기에서 일단 오류가 하나납니다! Invalid props.style key `borderBottom` supplied to `View`
               /*
               */
-          borderBottomWidth: Math.cos(1 / 3 * Math.PI) * this.props.radius,
+          borderBottomWidth: Math.cos(1 / 3 * Math.PI) * 100,
           borderBottomColor: 'transparent',
-          borderLeftWidth: Math.sin(1 / 3 * Math.PI) * this.props.radius,
+          borderLeftWidth: Math.sin(1 / 3 * Math.PI) * 100,
           borderLeftColor: 'blue',
           display: 'none'
         }} />
@@ -187,8 +187,7 @@ export default class App extends React.Component {
 }
 App.defaultProps = {
   data: [40, 30, 10, 10],
-  colors: ['red', 'blue', 'green', 'yellow'],
-  radius: 100
+  colors: ['red', 'blue', 'green', 'yellow']
 }
 const styles = StyleSheet.create({
   container: {
@@ -197,24 +196,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   circle: {
-    width: this.props.radius * 2,
+    width: 200,
     position: 'absolute',
-    height: this.props.radius * 2,
-    borderRadius: this.props.radius
+    height: 200,
+    borderRadius: 100
   },
   rectangle: {
-    width: this.props.radius,
-    height: this.props.radius * 2,
+    width: 100,
+    height: 200,
     left: 0,
     position: 'absolute',
     backgroundColor: 'transparent'
   },
   rightHalfCircle: {
-    width: this.props.radius,
-    height: this.props.radius * 2,
-    left: this.props.radius,
+    width: 100,
+    height: 200,
+    left: 100,
     position: 'absolute',
-    borderBottomRightRadius: this.props.radius * 2,
-    borderTopRightRadius: this.props.radius * 2
+    borderBottomRightRadius: 200,
+    borderTopRightRadius: 200
   }
 })
